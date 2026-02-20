@@ -1,44 +1,51 @@
+"use client"
+
 import {
   Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
   Card,
   Heading,
-  Badge
 } from "@chakra-ui/react";
 
-export function ProductsTable({ products }) {
+//these types and interfaces will be moved and are temporarily here
+
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+}
+
+interface ProductsTableProps {
+  products: Product[];
+}
+
+export default function ProductsTable( {products} : ProductsTableProps ) {
   return (
-    <Card p="6">
+    <Card.Root p="6">
       <Heading size="sm" mb="4">
         Recent Products
       </Heading>
 
-      <Table variant="simple">
-        <Thead>
-          <Tr>
-            <Th>Name</Th>
-            <Th>Price</Th>
-            <Th>Stock</Th>
-            <Th>Status</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {products.map((p) => (
-            <Tr key={p.id}>
-              <Td>{p.title}</Td>
-              <Td>${p.price}</Td>
-              <Td>{p.stock}</Td>
-              <Td>
-                <Badge colorScheme="green">Active</Badge>
-              </Td>
-            </Tr>
+      <Table.ScrollArea borderWidth="1px" rounded="md" height="160px">
+      <Table.Root size="sm" stickyHeader>
+        <Table.Header>
+          <Table.Row bg="bg.subtle">
+            <Table.ColumnHeader>Product</Table.ColumnHeader>
+            <Table.ColumnHeader>Category</Table.ColumnHeader>
+            <Table.ColumnHeader textAlign="end">Price</Table.ColumnHeader>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {products.map((item) => (
+            <Table.Row key={item.id}>
+              <Table.Cell>{item.title}</Table.Cell>
+              {/* <Table.Cell>{item.category}</Table.Cell> */}
+              <Table.Cell textAlign="end">{item.price}</Table.Cell>
+            </Table.Row>
           ))}
-        </Tbody>
-      </Table>
-    </Card>
+        </Table.Body>
+      </Table.Root>
+    </Table.ScrollArea>
+    </Card.Root>
   );
 }

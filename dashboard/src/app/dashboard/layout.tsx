@@ -1,21 +1,23 @@
 import { Box, Flex } from "@chakra-ui/react";
-import Sidebar from "../../components/dashboard/Sidebar";
+import Sidebar from "../../components/dashboard/layout/Sidebar";
 import React from "react";
-import Navbar from "../../components/dashboard/Navbar";
+import Navbar from "../../components/dashboard/layout/Navbar";
 
 export default function DashboardLayout({ children } : { children: React.ReactNode }) {
   return (
-    <Flex minH="100vh" bg="gray.50">
+    <Flex 
+      maxH="100vh" 
+      bg="gray.50"
+    >
       <Sidebar />
-      <Box flex="1" p="6">
+      <Box 
+        flex="1" 
+        p="6"
+        maxH={"100vh"}
+        overflowY={"Scroll"}
+      >
         <Navbar></Navbar>
-        <Box
-          h="400px"
-          bg="white"
-          borderRadius="xl"
-          border="1px solid"
-          borderColor="gray.200"
-        >
+        <Box mt={"20px"}>
           {children}
         </Box>
       </Box>

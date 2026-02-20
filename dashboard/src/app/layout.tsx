@@ -11,7 +11,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
   return (
     <html suppressHydrationWarning>
-      <body>
+      <body className="overflow-hidden">
         <Provider>{children}</Provider>
       </body>
     </html>
