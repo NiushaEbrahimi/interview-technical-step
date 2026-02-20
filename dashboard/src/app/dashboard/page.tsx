@@ -6,7 +6,7 @@ import ProductsTable from "@/components/dashboard/ProductsTable";
 
 async function getProducts() {
 
-  const res = await fetch('https://dummyjson.com/products/category/smartphones?limit=10&skip=10&select=title,price');
+  const res = await fetch('https://dummyjson.com/products/category/smartphones?select=title,price');
   console.log(res);
   
   if (!res.ok) throw new Error('Failed to fetch products');
@@ -41,7 +41,7 @@ export default async function Dashboard() {
       <GridItem colSpan={12}>
         <ProductsTable products={data.products}/>
       </GridItem> 
-      
+
     </Grid>
   );
 }

@@ -35,29 +35,23 @@ export default function Navbar() {
 
   return (
     <Flex
+      position="fixed"
+      top="2vh"
+      left="50%"
+      transform="translateX(-50%)"
+      minW={{ base: "90%", md: "55%" }}
+      maxW="1200px"
+      zIndex={1030}
+      px={{ base: 4, md: 6 }}
+      py={2}
       align="center"
       justify="space-between"
-      bg="rgba(255,255,255,0.1)"
-      px="6"
-      py="2"
-      borderRadius="2xl"
+      borderRadius="2rem"
+      bg="#ffffff5a"
       border="1px solid"
-      borderColor="gray.200"
-      position="sticky"
-      top="0"
-      zIndex="10"
-      filter={"drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"}
+      borderColor="rgba(0, 0, 0, 0.1)"
+      backdropFilter="blur(6px) saturate(120%)"
     >
-      <Box 
-        position={"absolute"}
-        bg={"white"}
-        top={"0px"}
-        left={"0px"}
-        width={"100%"}
-        filter="blur(5px)"
-        height={"100%"}
-        zIndex={"-1"}
-      ></Box>
       <Box>
         <Heading as={"h2"}>{title}</Heading>
       </Box>
@@ -91,6 +85,7 @@ export default function Navbar() {
   );
 }
 
+// temporarilly
 const MenuExample = () => {
     const [open, setOpen] = useState(false)
     // for now

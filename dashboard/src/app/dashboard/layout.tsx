@@ -7,7 +7,7 @@ export default function DashboardLayout({ children } : { children: React.ReactNo
   return (
     <Flex 
       maxH="100vh" 
-      bg="gray.50"
+      bg="#5bd8a624"
     >
       <Sidebar />
       <Box 
@@ -15,9 +15,10 @@ export default function DashboardLayout({ children } : { children: React.ReactNo
         p="6"
         maxH={"100vh"}
         overflowY={"Scroll"}
+        position={"relative"}
       >
         <Navbar></Navbar>
-        <Box mt={"20px"}>
+        <Box mt={"50px"}>
           {children}
         </Box>
       </Box>
