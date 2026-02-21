@@ -7,7 +7,8 @@ export default function DashboardLayout({ children } : { children: React.ReactNo
   return (
     <Flex 
       maxH="100vh" 
-      bg="#5bd8a624"
+      // bg="#5bd8a624"
+      bg={"bg.subtle"}
     >
       <Sidebar />
       <Box 
@@ -18,7 +19,9 @@ export default function DashboardLayout({ children } : { children: React.ReactNo
         position={"relative"}
       >
         <Navbar></Navbar>
-        <Box mt={"50px"}>
+        <Box mt={"50px"}
+          bg={"bg.subtle"}
+        >
           {children}
         </Box>
       </Box>

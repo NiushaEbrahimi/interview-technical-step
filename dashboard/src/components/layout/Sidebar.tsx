@@ -1,15 +1,15 @@
 "use client";
 
 import { Box, VStack, Text } from "@chakra-ui/react";
-import { Home, Settings, ShoppingCart, User } from "lucide-react";
+import { Home, Users, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
   { name: "Dashboard", icon: Home, href: "/dashboard" },
   { name: "Products", icon: ShoppingCart, href: "/dashboard/products" },
-  { name: "Users", icon: User, href: "/dashboard/users" },
-  { name: "Settings", icon: Settings, href: "/dashboard/settings" }
+  { name: "Users", icon: Users, href: "/dashboard/users" },
+  { name: "Profile", icon: User, href: "/dashboard/profile" }
 ];
 
 export default function Sidebar() {

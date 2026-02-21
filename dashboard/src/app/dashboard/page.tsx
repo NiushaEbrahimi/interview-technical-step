@@ -30,7 +30,7 @@ export default async function Dashboard() {
   const users = await getUsers();
 
   return (
-      <Grid
+    <Grid
       templateColumns={{
         base: "1fr",
         lg: "repeat(12, 1fr)",

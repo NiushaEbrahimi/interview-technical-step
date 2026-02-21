@@ -20,7 +20,11 @@ interface ProductsTableProps {
 
 export default function ProductsTable( {products} : ProductsTableProps ) {
   return (
-    <Card.Root p="6">
+    <Card.Root 
+      p="6"
+      shadow={"lg"}
+      borderRadius={"1rem"}
+    >
       <Heading size="sm" mb="4">
         Recent Products
       </Heading>

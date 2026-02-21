@@ -2,7 +2,7 @@ import Products from "@/components/products/ProductsPage";
 import { Flex } from "@chakra-ui/react";
 
 
-// this is temporarily, it is used inother pages to fetch products 
+// TODO: this is temporarily, it is used inother pages to fetch products 
 // data, ideally this should be in a separate file and imported 
 // here and in the products page
 

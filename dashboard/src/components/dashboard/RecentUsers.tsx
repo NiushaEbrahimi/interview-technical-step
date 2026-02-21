@@ -1,9 +1,20 @@
 import { Card, Heading, VStack, HStack, Text } from "@chakra-ui/react";
 import { User } from "lucide-react";
 
-export default function RecentUsers({ users }) {
+// TODO: type here is temporary
+type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+};
+
+export default function RecentUsers({ users }: { users: User[] }) {
   return (
-    <Card.Root p="6">
+    <Card.Root 
+      p="6"
+      shadow={"lg"}
+      borderRadius={"1rem"}
+    >
       <Heading size="sm" mb="4">
         New Users
       </Heading>
