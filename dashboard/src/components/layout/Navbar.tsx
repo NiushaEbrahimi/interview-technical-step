@@ -58,14 +58,22 @@ export default function Navbar() {
 
       <HStack padding={"1"} gap={"4"}>
 
-        <InputGroup maxW="280px" startElement={<Search size={18} />}>
-          <Input placeholder="Search..." />
+        <InputGroup
+          bg={"white"}
+          maxW="280px"
+          borderRadius={"1rem"}
+          startElement={<Search size={18}
+        />}>
+          <Input
+            borderRadius={"1rem"}
+            placeholder="Search..."
+          />
         </InputGroup>
 
         <IconButton
           aria-label="Notifications"
           variant="ghost"
-          bg={"gray.100"}
+          bg={"white"}
           borderRadius="4xl"
           border="1px solid"
           borderColor="gray.200"
@@ -92,10 +100,10 @@ const MenuExample = () => {
     const username = "Niusha"
 
     return (
-        <Stack gap="4" align="flex-start">
+        <Stack gap="4" align="flex-start" >
         <Menu.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
             <Menu.Trigger asChild>
-            <Button variant="outline" size="sm">
+            <Button bg={"white"} variant="outline" size="sm" borderRadius={"1rem"}>
                 <User size={18} />
                 {username}
             </Button>
@@ -103,11 +111,9 @@ const MenuExample = () => {
             <Portal>
             <Menu.Positioner>
                 <Menu.Content>
-                <Menu.Item value="new-txt">New Text File</Menu.Item>
-                <Menu.Item value="new-file">New File...</Menu.Item>
-                <Menu.Item value="new-win">New Window</Menu.Item>
-                <Menu.Item value="open-file">Open File...</Menu.Item>
-                <Menu.Item value="export">Export</Menu.Item>
+                <Menu.Item value="edit-profile">Edit Profile</Menu.Item>
+                <Menu.Item value="messages">Messages</Menu.Item>
+                <Menu.Item value="logout">Logout</Menu.Item>
                 </Menu.Content>
             </Menu.Positioner>
             </Portal>

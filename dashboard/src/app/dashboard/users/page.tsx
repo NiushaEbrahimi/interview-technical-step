@@ -1,11 +1,20 @@
-import { Box, Heading } from "@chakra-ui/react";
+import UsersPage from "@/components/users/UsersPage";
 
-export default function Dashboard() {
+const getUsers = async () => {
+  const res = await fetch("https://dummyjson.com/users");
+  if (!res.ok) {
+    throw new Error("Failed to fetch users");
+  }
+  const data = await res.json();
+  return data.users;
+
+}
+
+export default async function Users() {
+
+  const users = await getUsers();
+
   return (
-    <>
-      <Heading size="lg" mb="6">
-        users
-      </Heading>
-    </>
+    <UsersPage users={users} />
   );
 }

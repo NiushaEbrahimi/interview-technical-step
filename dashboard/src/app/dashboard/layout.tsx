@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
-import Sidebar from "../../components/dashboard/layout/Sidebar";
+import Sidebar from "../../components/layout/Sidebar";
 import React from "react";
-import Navbar from "../../components/dashboard/layout/Navbar";
+import Navbar from "../../components/layout/Navbar";
 
 export default function DashboardLayout({ children } : { children: React.ReactNode }) {
   return (

@@ -1,9 +1,9 @@
 import { Card, Heading, VStack, HStack, Text } from "@chakra-ui/react";
 import { User } from "lucide-react";
 
-export function RecentUsers({ users }) {
+export default function RecentUsers({ users }) {
   return (
-    <Card p="6">
+    <Card.Root p="6">
       <Heading size="sm" mb="4">
         New Users
       </Heading>
@@ -18,6 +18,6 @@ export function RecentUsers({ users }) {
           </HStack>
         ))}
       </VStack>
-    </Card>
+    </Card.Root>
   );
 }

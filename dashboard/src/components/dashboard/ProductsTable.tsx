@@ -44,6 +44,7 @@ export default function ProductsTable( {products} : ProductsTableProps ) {
             </Table.Row>
           ))}
         </Table.Body>
+        
       </Table.Root>
     </Table.ScrollArea>
     </Card.Root>
