@@ -25,10 +25,17 @@ export default function DropDownSelect() {
   const handleDeselectAll = () => setSelected([])
 
   const handleSearch = (query: string) => {
-    const filtered = options.filter(
+    const q = query.trim()
+    if (!q) {
+      setOptions(electronics)
+      setVisibleCount(perPage)
+      return
+    }
+
+    const filtered = electronics.filter(
       (item) =>
-        item.name.toLowerCase().includes(query.toLowerCase()) ||
-        item.categorie.toLowerCase().includes(query.toLowerCase())
+        item.name.toLowerCase().includes(q.toLowerCase()) ||
+        item.categorie.toLowerCase().includes(q.toLowerCase())
     )
     setOptions(filtered)
     setVisibleCount(perPage)
