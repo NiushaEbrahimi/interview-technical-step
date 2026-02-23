@@ -1,3 +1,14 @@
+export const categories = [
+  'Phone',
+  'Tablet',
+  'Laptop',
+  'TV',
+  'Camera',
+  'Audio',
+  'Smartwatch',
+  'Gaming console',
+]
+
 export const electronics = [
   { id: 1, name: 'Iphone 14', categorie: 'Phone' },
   { id: 2, name: 'Iphone 13', categorie: 'Phone' },
