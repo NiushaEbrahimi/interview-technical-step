@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { ListboxOption, ListboxOptions } from '@headlessui/react';
 import { motion } from "framer-motion";
+import OptionItem from "./OptionItem";
 
 type Device = {
     id: number,
@@ -25,7 +26,7 @@ export default function ListOfItems(
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            className="mt-3 p-5 max-h-120 w-full flex flex-col gap-2 rounded-lg"
+            className="mt-3 p-5 max-h-100 w-full flex flex-col gap-2 rounded-lg"
             >
             <div
                 ref={listRef}
@@ -35,7 +36,7 @@ export default function ListOfItems(
                     setVisibleCount((v) => Math.min(total, v + perPage))
                 }
                 }}
-                className="overflow-auto max-h-120 space-y-2 px-1"
+                className="overflow-auto max-h-100 space-y-2 p-2"
             >
                 {options.slice(0, visibleCount).map((device : Device) => (
                 <ListboxOption
@@ -50,15 +51,7 @@ export default function ListOfItems(
                     }
                 >
                     {({ selected }) => (
-                    <>
-                        <div className="flex flex-col">
-                        <span className="text-sm font-medium">{device.name}</span>
-                        <span className={`text-xs ${selected ? 'text-white/90' : 'text-slate-400'}`}>
-                            {device.categorie}
-                        </span>
-                        </div>
-                        <Check className={`${selected ? 'inline-block h-5 w-5' : 'opacity-0 h-5 w-5'}`} />
-                    </>
+                    <OptionItem device={device} selected={selected} />
                     )}
                 </ListboxOption>
                 ))}
