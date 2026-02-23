@@ -18,6 +18,7 @@ export default function Sidebar() {
   return (
     <Box
       w="260px"
+      // TODO: fix this for the theme
       bg="white"
       borderRight="1px solid"
       borderColor="gray.200"

@@ -11,12 +11,12 @@ import {
   Stack,
   Field,
   Flex,
-  Link
+  // Link
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
-import { authAPI } from "@/_lib/auth";
 import { Toaster, toaster } from "@/components/ui/toaster"
+import { authAPI } from "@/_lib/authClientService";
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
@@ -33,6 +33,7 @@ export default function LoginPage() {
     setLoading(true)
 
     try {
+      console.log('Attempting login with:', { username, password })
       await authAPI.login(username, password)
       toaster.success({
         title: 'Successful Login',
@@ -40,9 +41,10 @@ export default function LoginPage() {
         duration: 3000,
         closable: true,
       })
-      router.push('/dashboard')
+      router.push('/dashboard/dashboard')
     } catch (err: any) {
       setError('username or password is incorrect')
+      console.log(err.message)
       toaster.error({
         title: 'Error Loging in',
         description: err.message,

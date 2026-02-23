@@ -11,17 +11,19 @@ import {
   Switch,
   Flex,
   Stack,
-  GridItem
+  GridItem,
+  Image
 } from "@chakra-ui/react";
-import { User } from "lucide-react";
 import { useTheme } from "next-themes";
+import { User } from "@/_lib/types";
 import { useState, useEffect } from "react";
 
-export default function ProfilePage() {
+export default function ProfilePage({ user } : { user: User}) {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-
+  
   useEffect(() => {
+    console.log('User data:', user);
     // TODO : fix 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
@@ -60,14 +62,33 @@ export default function ProfilePage() {
               Profile
             </Heading>
 
-            <Flex gap="6" align="center" flexWrap="wrap">
-              {/* TODO: Replace with users image */}
-              <User/>
-
-              <Stack flex="1" minW="250px">
-                <Input placeholder="Full Name" />
-                <Input placeholder="Email Address" />
-              </Stack>
+            <Flex gap="6" flexDirection={"row"} align="center">
+              {/* eslint-disable-next-line jsx-a11y/alt-text */}
+              <Image
+                src={user.image}
+              />
+              <Grid 
+                templateColumns={
+                  "repeat(2, 1fr)"
+                }
+                templateRows={
+                  "1fr 1fr"
+                }
+                gap="6"
+              >
+                <GridItem >
+                  <Heading>Name:</Heading>
+                  <Text>{user.firstName} {user.lastName}</Text>
+                </GridItem>
+                <GridItem>
+                  <Heading>Username:</Heading>
+                  <Text>{user.username}</Text>
+                </GridItem>
+                <GridItem>
+                  <Heading>Email:</Heading>
+                  <Text>{user.email}</Text>
+                </GridItem>
+              </Grid>
             </Flex>
           </Card.Root>
         </GridItem>
@@ -158,15 +179,15 @@ export default function ProfilePage() {
             </Heading>
 
             <Stack gap="4">
-              <Input placeholder="Current Password" type="password" />
-              <Input placeholder="New Password" type="password" />
-              <Input placeholder="Confirm Password" type="password" />
+              <Box><Input placeholder="Current Password" type="password" /></Box>
+              <Box><Input placeholder="New Password" type="password" /></Box>
+              <Box><Input placeholder="Confirm Password" type="password" /></Box>
             </Stack>
           </Card.Root>
         </GridItem>
 
         <Flex justify="flex-end">
-          <Button colorPalette="blue" size="lg">
+          <Button bg={"var(--main-color)"} size="lg">
             Save Changes
           </Button>          
         </Flex>
