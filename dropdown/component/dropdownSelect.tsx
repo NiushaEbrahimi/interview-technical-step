@@ -41,6 +41,12 @@ export default function DropDownSelect() {
     setVisibleCount(perPage)
   }
 
+  // Order options so currently selected items appear first
+  const orderedOptions = [
+    ...selected.filter((s) => options.some((o) => o.id === s.id)),
+    ...options.filter((o) => !selected.some((s) => s.id === o.id)),
+  ]
+
   return (
     <div className="mx-auto w-120 min-h-150 rounded-xl bg-linear-to-br from-slate-900 via-indigo-700 to-cyan-600 p-5 shadow-2xl shadow-indigo-900">
       <div className="rounded-lg bg-white/6 ring-1 ring-white/10 p-4 backdrop-blur-sm">
@@ -71,15 +77,15 @@ export default function DropDownSelect() {
               <AnimatePresence>
                 {open && (
                   <ListOfItems
-                    listRef={listRef}
-                    visibleCount={visibleCount}
-                    total={total}
-                    perPage={perPage}
-                    setVisibleCount={setVisibleCount}
-                    options={options}
-                    handleSearch={handleSearch}
-                    setOptions={setOptions}
-                  />
+                      listRef={listRef}
+                      visibleCount={visibleCount}
+                      total={total}
+                      perPage={perPage}
+                      setVisibleCount={setVisibleCount}
+                      options={orderedOptions}
+                      handleSearch={handleSearch}
+                      setOptions={setOptions}
+                    />
                 )}
               </AnimatePresence>
             </>
