@@ -1,9 +1,9 @@
 "use client"
 
 import { Check } from 'lucide-react'
-import React from 'react'
+import { Device } from '@/types/types';
 
-export default function OptionItem({ device, selected }: { device: any; selected: boolean }) {
+export default function OptionItem({ device, selected }: { device: Device; selected: boolean }) {
   return (
     <>
       <div className="flex flex-col">

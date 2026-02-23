@@ -5,10 +5,8 @@ import React, { useState, useCallback } from 'react'
 
 export default function SearchBar({
   onSearch,
-  placeholder = 'Search devices...',
 }: {
   onSearch: (query: string) => void
-  placeholder?: string
 }) {
   const [query, setQuery] = useState('')
 
@@ -27,13 +25,20 @@ export default function SearchBar({
   }
 
   return (
-    <div className="relative flex items-center mb-4">
+    <div className="relative flex items-center">
       <Search className="absolute left-3 h-5 w-5 text-slate-400 pointer-events-none" />
       <input
         type="text"
         value={query}
         onChange={handleChange}
-        placeholder={placeholder}
+        onKeyDown={(e) => {
+          e.stopPropagation()
+          if (e.key === 'Enter') {
+            e.preventDefault()
+            onSearch(query)
+          }
+        }}
+        placeholder='Search devices...'
         className="w-full bg-white pl-10 pr-10 py-2 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
       />
       {query && (

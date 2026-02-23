@@ -2,15 +2,16 @@
 
 import { useState } from "react"
 import { electronics, categories } from "@/public/data"
+import { Device } from "@/types/types"
 
 export default function Categories({
         setOptions
     }: {
-        setOptions: (options: any[]) => void,
+        setOptions: (options: Device[]) => void,
 }) {
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
     return(
-        <div className='mt-4 flex flex-row max-w-100 overflow-x-auto items-center gap-3 scrollbar-hide'>
+        <div className='flex flex-row max-w-100 overflow-x-auto items-center gap-3 scrollbar-hide'>
             <button
                 className={`text-sm font-medium px-3 py-1 rounded-lg mb-2 cursor-pointer
                 ${selectedCategory === 'all' ? 'bg-cyan-500 text-white' : 'bg-white/10 text-white hover:bg-white hover:text-black'}

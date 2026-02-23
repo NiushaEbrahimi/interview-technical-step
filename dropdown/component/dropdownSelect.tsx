@@ -7,18 +7,17 @@ import { useState, useRef, useEffect } from 'react'
 import { electronics } from '@/public/data'
 import ListOfItems from './ListOfItems'
 import DropdownHeader from './DropdownHeader'
-import Categories from './Categories'
-import SearchBar from './SearchBar'
 
 export default function DropDownSelect() {
   const [options,setOptions] = useState(electronics)
   const [selected, setSelected] = useState([options[0], options[1]])
   const perPage = 20
   const total = options.length
-  const [visibleCount, setVisibleCount] = useState(perPage)
+  const [visibleCount, setVisibleCount] = useState<number>(perPage)
   const listRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setVisibleCount((v) => Math.min(v, total))
   }, [total])
 
@@ -26,7 +25,7 @@ export default function DropDownSelect() {
   const handleDeselectAll = () => setSelected([])
 
   const handleSearch = (query: string) => {
-    const filtered = electronics.filter(
+    const filtered = options.filter(
       (item) =>
         item.name.toLowerCase().includes(query.toLowerCase()) ||
         item.categorie.toLowerCase().includes(query.toLowerCase())
@@ -36,7 +35,7 @@ export default function DropDownSelect() {
   }
 
   return (
-    <div className="mx-auto w-120 min-h-150 rounded-xl bg-gradient-to-br from-slate-900 via-indigo-700 to-cyan-600 p-5 shadow-2xl shadow-indigo-900">
+    <div className="mx-auto w-120 min-h-150 rounded-xl bg-linear-to-br from-slate-900 via-indigo-700 to-cyan-600 p-5 shadow-2xl shadow-indigo-900">
       <div className="rounded-lg bg-white/6 ring-1 ring-white/10 p-4 backdrop-blur-sm">
         
         <DropdownHeader
@@ -44,9 +43,8 @@ export default function DropDownSelect() {
           onDeselectAll={handleDeselectAll}
           selectedCount={selected.length}
         />
-        <SearchBar onSearch={handleSearch} />
         <Listbox multiple value={selected} onChange={setSelected}>
-          {({ open }) => (
+          {({open})=>(
             <>
               <div className="relative">
                 <ListboxButton
@@ -63,9 +61,6 @@ export default function DropDownSelect() {
                   </>
                 </ListboxButton>
               </div>
-
-              <Categories setOptions={setOptions} />
-
               <AnimatePresence>
                 {open && (
                   <ListOfItems
@@ -75,6 +70,8 @@ export default function DropDownSelect() {
                     perPage={perPage}
                     setVisibleCount={setVisibleCount}
                     options={options}
+                    handleSearch={handleSearch}
+                    setOptions={setOptions}
                   />
                 )}
               </AnimatePresence>
