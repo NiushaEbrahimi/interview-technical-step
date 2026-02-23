@@ -1,10 +1,24 @@
 import { Check } from "lucide-react";
 import { ListboxOption, ListboxOptions } from '@headlessui/react';
 import { motion } from "framer-motion";
-import { electronics } from "@/public/data";
 
-export default function ListOfItems({ listRef, visibleCount, total, perPage, setVisibleCount }: { listRef: React.RefObject<HTMLDivElement>, visibleCount: number, total: number, perPage: number, setVisibleCount: (count: number) => void }) {
-    
+type Device = {
+    id: number,
+    name: string,
+    categorie: string
+}
+
+export default function ListOfItems(
+    { listRef, visibleCount, total, perPage, setVisibleCount, options } 
+    :{
+        listRef: React.RefObject<HTMLDivElement>,
+        visibleCount: number,
+        total: number,
+        perPage: number,
+        setVisibleCount: (count: number) => void 
+        options: Device[]
+    }) {
+    console.log(options)
     return(
         <ListboxOptions
             as={motion.div}
@@ -23,7 +37,7 @@ export default function ListOfItems({ listRef, visibleCount, total, perPage, set
                 }}
                 className="overflow-auto max-h-120 space-y-2 px-1"
             >
-                {electronics.slice(0, visibleCount).map((device) => (
+                {options.slice(0, visibleCount).map((device : Device) => (
                 <ListboxOption
                     key={device.id}
                     value={device}

@@ -8,7 +8,9 @@ import { electronics, categories } from '@/public/data'
 import ListOfItems from './ListOfItems'
 
 export default function DropDownSelect() {
-  const [selected, setSelected] = useState([electronics[0], electronics[1]])
+  const [selectedCategory, setSelectedCategory] = useState<string>('')
+  const [options,setOptions] = useState(electronics)
+  const [selected, setSelected] = useState([options[0], options[1]])
   const perPage = 20
   const total = electronics.length
   const [visibleCount, setVisibleCount] = useState(perPage)
@@ -64,11 +66,19 @@ export default function DropDownSelect() {
 
               <div className=' mt-4 flex flex-row max-w-100 overflow-x-scroll items-center gap-3'>
                 {categories.map((cat) => (
-                  <div key={cat} className='text-sm font-medium bg-white/10 text-slate-700 px-3 py-1 rounded-lg mb-2
-                    hover:bg-white text-black cursor-pointer transition
-                  '>
+                  <button
+                    key={cat} 
+                    className={`text-sm font-medium px-3 py-1 rounded-lg mb-2
+                    ${selectedCategory === cat ? 'bg-cyan-500 text-white' : 'bg-white/10 text-slate-700'}
+                    hover:bg-white hover:text-black cursor-pointer transition `}
+                    onClick={() => {
+                      setSelectedCategory(cat)
+                      setOptions(electronics.filter((e) => e.categorie === cat))
+                      console.log(options)
+                    }}
+                  >
                     {cat}
-                  </div>
+                  </button>
                 ))}
               </div>
 
@@ -80,6 +90,7 @@ export default function DropDownSelect() {
                     total={total}
                     perPage={perPage}
                     setVisibleCount={setVisibleCount}
+                    options={options}
                   />
                 )}
               </AnimatePresence>
