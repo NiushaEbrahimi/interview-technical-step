@@ -1,4 +1,4 @@
-import { fetchGame } from "@/_lib/api"
+import { fetchGame } from "@/lib/api"
 import Image from "next/image"
 
 export default async function GamePage({ params } : { params: { slug: string } }) {

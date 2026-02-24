@@ -3,7 +3,12 @@ export interface Game {
   name: string
   slug: string
   background_image: string
-  rating: number
+  rating :{
+    id:number,
+    title:string,
+    count:number,
+    percent:number,
+  }[]
   platforms: {
     platform: {
       id: number

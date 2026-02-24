@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Star } from "lucide-react"
 import Image from "next/image"
-import { Game } from "@/_lib/types"
+import { Game } from "@/lib/types"
 
 export default function GameCard({ game } : { game: Game }) {
   return (
