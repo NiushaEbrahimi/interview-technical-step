@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 Game Discovery App
 
-## Getting Started
+> A game browsing experience built with **Next.js** and **RAWG API**.  
+> ⚠️ **Note:** Due to regional network restrictions affecting API access, live data fetching may be limited. The core architecture, UI, and logic are fully implemented.
 
-First, run the development server:
+[![Status](https://img.shields.io/badge/status-partial%20implementation-orange)](https://github.com/NiushaEbrahimi/interview-technical-step/tree/rawg-games/game-discovery)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Description
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project aims to build a responsive game discovery platform using the [RAWG API](https://api.rawg.io/docs/). It includes game listing, advanced filtering, search functionality, and dynamic game detail pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Important Notice: API Connectivity
+Due to international sanctions and network restrictions, direct connections to the **RAWG API** are frequently blocked or unstable.
+- **Implementation Status:** The complete frontend architecture, state management, filtering logic, and UI components are implemented.
+- **Data Fetching:** The API service layer is structured correctly. For demonstration purposes, **mock data** or **proxy configurations** may be required to view live content in this region.
+- **Code Quality:** All best practices (Error Boundaries, Loading States, TypeScript types) are applied regardless of API availability.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Features Status
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Feature | Status | Notes |
+|---------|--------|-------|
+| **Game Listing** | ✅ Implemented | Grid layout with infinite scroll/pagination |
+| **Search & Filters** | ✅ Implemented | Debounced search, genre/platform filters |
+| **Game Details** | ✅ Implemented | Dynamic routing (`/game/[slug]`) |
+| **API Integration** | ⚠️ Restricted | Service layer ready|
+| **Error Handling** | ✅ Implemented | Global error boundaries & fallback UI |
+| **Performance** | ✅ Implemented | Image optimization, lazy loading |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 14 (App Router) |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS |
+| **Data Fetching** | React Query (TanStack Query) |
+| **API** | RAWG API (v2.3) |
+| **Icons** | Lucide React / Heroicons |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Installation & Setup
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- **RAWG API Key** (Get one at [rawg.io/apidocs](https://rawg.io/apidocs))
+
+### Steps
+
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/NiushaEbrahimi/interview-technical-step.git
+    cd interview-technical-step/game-discovery
+    ```
+
+2.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Environment Variables:**
+    Create a `.env.local` file in the root of the project:
+    ```env
+    NEXT_PUBLIC_RAWG_API_KEY=your_api_key_here
+    ```
+
+4.  **Run Development Server:**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
