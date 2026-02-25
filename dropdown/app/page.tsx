@@ -1,4 +1,4 @@
-import DropDownSelect from "@/component/DropDownSelect"
+import DropDownSelect from "@/component/dropdownSelect"
 
 export default function Page() {
   return(
