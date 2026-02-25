@@ -51,5 +51,5 @@ export async function fetchGames() {
     }
   }
 
-  return undefined as any;
+  return undefined;
 }

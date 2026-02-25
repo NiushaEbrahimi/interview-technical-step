@@ -1,7 +1,7 @@
 import GameCard from "./GameCard"
 import { Game } from "@/lib/types"
 
-export default function GameGrid({ games } : { games?: Game[] }) {
+export default function GameGrid({ games } : { games: Game[] }) {
   return (
     <div className="
       grid
