@@ -1,14 +1,8 @@
 import { Card, Heading, VStack, HStack, Text } from "@chakra-ui/react";
 import { User } from "lucide-react";
+import { UserType } from "@/_lib/types";
 
-// TODO: type here is temporary
-type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-};
-
-export default function RecentUsers({ users }: { users: User[] }) {
+export default function RecentUsers({ users }: { users: UserType[] }) {
   return (
     <Card.Root 
       p="6"

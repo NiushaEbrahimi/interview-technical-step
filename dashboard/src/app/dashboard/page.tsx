@@ -1,5 +1,12 @@
-import { redirect } from 'next/navigation';
+import { getCurrentUserAction } from '@/_lib/authServerActions'
+import { redirect } from 'next/navigation'
 
-export default function DashboardRoot() {
-  redirect('/dashboard/dashboard');
+export default async function DashboardIndexPage() {
+  const user = await getCurrentUserAction()
+  
+  if (!user) {
+    redirect('/login')
+  }
+  
+  redirect('/dashboard/dashboard')
 }

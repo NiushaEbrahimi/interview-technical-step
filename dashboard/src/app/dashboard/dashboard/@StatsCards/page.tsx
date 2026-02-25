@@ -1,11 +1,16 @@
 import { SimpleGrid, Card, Stat, Box} from "@chakra-ui/react";
 import { DollarSign, ShoppingBag, ShoppingCart, Users } from "lucide-react";
+import { getProductsStats, getUsersStats } from "@/_lib/services/getStats";
 
 export default function StatsCards() {
+
+  const totalUsers =  getUsersStats()
+  const totalProducts = getProductsStats()
+
   const stats = [
     { label: "Total Sales", value: "$123,456", icon: DollarSign },
-    { label: "Total Customers", value: "12,345", icon: Users },
-    { label: "Total Products", value: "876", icon: ShoppingBag },
+    { label: "Total Customers", value: totalUsers , icon: Users },
+    { label: "Total Products", value: totalProducts, icon: ShoppingBag },
     { label: "Total Orders", value: "34,567", icon: ShoppingCart },
   ]
   return (

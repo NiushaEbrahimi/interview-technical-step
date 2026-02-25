@@ -53,14 +53,16 @@ export async function logoutAction() {
   const cookieStore = await cookies()
   cookieStore.delete('accessToken')
   cookieStore.delete('refreshToken')
-  redirect('/signin')
+  redirect('/login')
 }
 
 export async function getCurrentUserAction() {
   const cookieStore = await cookies()
   const token = cookieStore.get('accessToken')?.value
   
-  if (!token) return null
+  if (!token) {
+    redirect('/login')
+  }
   
   try {
     const res = await fetch('https://dummyjson.com/auth/me', {
@@ -68,9 +70,17 @@ export async function getCurrentUserAction() {
       next: { revalidate: 0 },
     })
     
-    if (!res.ok) return null
+    if (!res.ok) {
+      if (res.status === 401) {
+        cookieStore.delete('accessToken')
+        cookieStore.delete('refreshToken')
+      }
+      redirect('/login')
+    }
+    
     return await res.json()
-  } catch {
-    return null
+  } catch (error) {
+    console.error('Failed to fetch user:', error)
+    redirect('/login')
   }
 }

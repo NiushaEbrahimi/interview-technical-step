@@ -15,21 +15,10 @@ import {
   Image
 } from "@chakra-ui/react";
 import { useTheme } from "next-themes";
-import { User } from "@/_lib/types";
-import { useState, useEffect } from "react";
+import { UserType } from "@/_lib/types";
 
-export default function ProfilePage({ user } : { user: User}) {
+export default function ProfilePage({ user } : { user: UserType}) {
   const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => {
-    console.log('User data:', user);
-    // TODO : fix 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   return (
     <Box p="6">

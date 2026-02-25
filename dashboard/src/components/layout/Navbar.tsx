@@ -13,14 +13,20 @@ import {
   Circle,
   Button, 
   Portal, 
-  Stack
+  Stack,
+  Skeleton,
+  SkeletonCircle,
 } from "@chakra-ui/react";
 
-import { Search, Bell, User } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useState } from "react"
+import { Search, Bell, LogOut } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from "react"
+import { getCurrentUser } from "@/_lib/authClientService";
+import { UserType } from "@/_lib/types";
+import Image from "next/image";
+import { logout } from "@/_lib/authClientService";
 
-function formatTitle({pathname} : {pathname: string}) {
+const formatTitle = ({pathname} : {pathname: string}) => {
   const segments = pathname.split("/").filter(Boolean);
   const last = segments[segments.length - 1] || "dashboard";
 
@@ -29,15 +35,84 @@ function formatTitle({pathname} : {pathname: string}) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+const MenuNavbar = ({user} : {user : UserType}) => {
+    const [open, setOpen] = useState(false)
+    const router = useRouter()
+
+    return (
+        <Stack gap="4" align="flex-start">
+        <Menu.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
+            <Menu.Trigger asChild>
+            <Button bg="white" variant="outline" size="md" borderRadius="1rem" px={"1.5rem"}>
+                <Image
+                  src={user.image}
+                  alt={`${user.username}'s avatar`}
+                  width={24}
+                  height={24}
+                  style={{ borderRadius: "50%", objectFit: "cover" }}
+                />
+                {user.username}
+            </Button>
+            </Menu.Trigger>
+            <Portal>
+            <Menu.Positioner>
+                <Menu.Content>
+                <Menu.Item value="edit-profile" onClick={()=>{router.push("/dashboard/profile")}}>Edit Profile</Menu.Item>
+                <Menu.Item value="messages">Messages</Menu.Item>
+                <Menu.Item 
+                  value="logout"
+                >
+                  <Button
+                    onClick={() => {
+                      logout().then(() => router.push('/login'))
+                    }}
+                    bg={"red.600"}
+                  >
+                    Logout
+                    <LogOut/>
+                  </Button>
+                </Menu.Item>
+                </Menu.Content>
+            </Menu.Positioner>
+            </Portal>
+        </Menu.Root>
+        </Stack>
+    )
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const title = formatTitle({pathname});
+  
+  const [user, setUser] = useState<UserType | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    
+    const fetchUser = async () => {
+      try {
+        const userData = await getCurrentUser();
+        if (mounted && userData) {
+          setUser(userData);
+        }
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+    
+    fetchUser();
+    
+    return () => { mounted = false; };
+  }, []);
 
   return (
     <Flex
       position="fixed"
       top="2vh"
-      left="50%"
+      left="55%"
       transform="translateX(-50%)"
       minW={{ base: "90%", md: "55%" }}
       maxW="1200px"
@@ -57,13 +132,12 @@ export default function Navbar() {
       </Box>
 
       <HStack padding={"1"} gap={"4"}>
-
         <InputGroup
           bg={"white"}
           maxW="280px"
           borderRadius={"1rem"}
-          startElement={<Search size={18}
-        />}>
+          startElement={<Search size={18} />}
+        >
           <Input
             borderRadius={"1rem"}
             placeholder="Search..."
@@ -86,38 +160,19 @@ export default function Navbar() {
             </Float>
         </IconButton>
 
-        <MenuExample></MenuExample>
-
+        {loading ? (
+          <HStack gap="2">
+            <SkeletonCircle size="8" />
+            <Skeleton width="80px" height="24px" borderRadius="md" />
+          </HStack>
+        ) : user ? (
+          <MenuNavbar user={user} />
+        ) : (
+          <Button size="sm" variant="outline" onClick={() => window.location.href = '/login'}>
+            Sign In
+          </Button>
+        )}
       </HStack>
     </Flex>
   );
-}
-
-// temporarilly
-const MenuExample = () => {
-    const [open, setOpen] = useState(false)
-    // for now
-    const username = "Niusha"
-
-    return (
-        <Stack gap="4" align="flex-start" >
-        <Menu.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
-            <Menu.Trigger asChild>
-            <Button bg={"white"} variant="outline" size="sm" borderRadius={"1rem"}>
-                <User size={18} />
-                {username}
-            </Button>
-            </Menu.Trigger>
-            <Portal>
-            <Menu.Positioner>
-                <Menu.Content>
-                <Menu.Item value="edit-profile">Edit Profile</Menu.Item>
-                <Menu.Item value="messages">Messages</Menu.Item>
-                <Menu.Item value="logout">Logout</Menu.Item>
-                </Menu.Content>
-            </Menu.Positioner>
-            </Portal>
-        </Menu.Root>
-        </Stack>
-    )
 }

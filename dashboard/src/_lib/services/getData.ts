@@ -1,19 +1,29 @@
 export async function getProducts() {
-
-  const res = await fetch('https://dummyjson.com/products/category/smartphones?select=title,price');
-  // console.log(res);
+  const res = await fetch('https://dummyjson.com/products/', {
+    next: { revalidate: 3600 },
+  });
   
-  if (!res.ok) throw new Error('Failed to fetch products');
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(`Failed to fetch products: ${res.status} ${errorData.message || res.statusText}`);
+  }
 
   return res.json();
 }
 
-export async function getUsers() {
-
-  const res = await fetch('https://dummyjson.com/users?limit=5&skip=10');
-  console.log(res);
+export async function getUsers( {limit, recent} : {limit : number, recent : boolean} ) {
+  const url = 
+    limit ? `https://dummyjson.com/users?limit=${limit}` 
+    : recent ? `https://dummyjson.com/users?sortBy=id&order=desc&limit=${limit}` 
+    : `https://dummyjson.com/users`
+  const res = await fetch(url, {
+    next: { revalidate: 3600 },
+  });
   
-  if (!res.ok) throw new Error('Failed to fetch users');
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(`Failed to fetch users: ${res.status} ${errorData.message || res.statusText}`);
+  }
 
   return res.json();
 }

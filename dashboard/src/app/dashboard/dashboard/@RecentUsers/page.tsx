@@ -1,17 +1,12 @@
 import { Card, Heading, VStack, HStack, Text } from "@chakra-ui/react";
 import { User } from "lucide-react";
 import { getUsers } from "@/_lib/services/getData";
-
-// TODO: type here is temporary
-type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-};
+import { UserType } from "@/_lib/types"
 
 
 export default async function RecentUsers() {
-  const { users } = await getUsers();
+  const limit : number = 7;
+  const { users } = await getUsers({limit, recent: true});
 
   return (
     <Card.Root 
@@ -24,7 +19,7 @@ export default async function RecentUsers() {
       </Heading>
 
       <VStack align="stretch">
-        {users.map((user : User) => (
+        {users.map((user : UserType) => (
           <HStack key={user.id}>
             <User/>
             <Text>

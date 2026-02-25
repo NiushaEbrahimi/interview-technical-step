@@ -1,16 +1,6 @@
 import Products from "@/components/products/ProductsPage";
 import { Flex } from "@chakra-ui/react";
-
-
-// TODO: this is temporarily, it is used inother pages to fetch products 
-// data, ideally this should be in a separate file and imported 
-// here and in the products page
-
-const getProducts = async () => {
-  const res = await fetch('https://dummyjson.com/products?limit=12');
-  if (!res.ok) throw new Error('Failed to fetch products');
-  return res.json();
-}
+import { getProducts } from "@/_lib/services/getData";
 
 export default async function Dashboard() {
 

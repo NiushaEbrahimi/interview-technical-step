@@ -16,25 +16,23 @@ import {
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
 import { Toaster, toaster } from "@/components/ui/toaster"
-import { authAPI } from "@/_lib/authClientService";
+import { Tooltip } from "@/components/ui/tooltip"
+import { login } from "@/_lib/authClientService";
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  // TODO: use this error message
-  const [error, setError] = useState('')
 
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('')
     setLoading(true)
 
     try {
       console.log('Attempting login with:', { username, password })
-      await authAPI.login(username, password)
+      await login(username, password)
       toaster.success({
         title: 'Successful Login',
         description: 'User logged in successfully',
@@ -43,7 +41,6 @@ export default function LoginPage() {
       })
       router.push('/dashboard/dashboard')
     } catch (err: any) {
-      setError('username or password is incorrect')
       console.log(err.message)
       toaster.error({
         title: 'Error Loging in',
@@ -70,6 +67,7 @@ export default function LoginPage() {
         maxW="420px"
         borderRadius={"1rem"}
         shadow={"lg"}
+        position="relative"
       >
         <Toaster />
         <Stack gap="6">
@@ -104,33 +102,67 @@ export default function LoginPage() {
                   required
                 />
               </Field.Root>
-
-              <Button
-                type="submit"
-                colorPalette="blue"
-                size="lg"
-                mt="2"
-              >
-                {loading ? 
-                <Box minWidth={"80vw"} minHeight={"90vh"} display={"flex"} alignItems={"center"} justifyContent={"center"}>
-                    <ProgressCircle.Root value={null} size="lg">
-                        <ProgressCircle.Circle>
-                            <ProgressCircle.Track stroke={"gray.100"}/>
-                            <ProgressCircle.Range  stroke={"#3ab684"} strokeLinecap={"round"}/>
-                        </ProgressCircle.Circle>
-                    </ProgressCircle.Root>
-                </Box>
-                : 'Login'}
-              </Button>
+              <FormButton loading={loading}/>
             </Stack>
           </form>
 
-          {/* <Flex justify="space-between" fontSize="sm">
-            <Link href="#">Forgot password?</Link>
-            <Link href="#">Create account</Link>
-          </Flex> */}
         </Stack>
+        <Box 
+          position={"absolute"}
+          top={{md: "100%", lg: "0"}}
+          right={{md: "50%", lg: "-12%"}}
+          translate={{md: "50% 50%", lg: ""}}
+        >
+          <TooltipLogin/>
+        </Box>
       </Card.Root>
     </Flex>
   );
+}
+
+const FormButton = ({ loading } : { loading : boolean }) => {
+  return(
+    <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+      <Button
+        type="submit"
+        bg={loading ? "gray.200" : "#3ab684"}
+        size="lg"
+        mt="2"
+      >
+        {loading ? 
+        <Box display="flex" justifyContent="center" alignItems="center">
+            <ProgressCircle.Root value={null} size={"sm"} >
+                <ProgressCircle.Circle >
+                    <ProgressCircle.Track stroke={"gray.100"}/>
+                    <ProgressCircle.Range  stroke={"#3ab684"} strokeLinecap={"round"}/>
+                </ProgressCircle.Circle>
+            </ProgressCircle.Root>
+        </Box>
+        : 'Login'}
+      </Button>
+    </Box>
+  )
+}
+
+const TooltipLogin = () => {
+  return (
+    <Tooltip
+      content="Since this is based on dummy.json, use an existing user,
+      username: emilys, password: emilyspass"
+      positioning={{ placement: "right-start" }}
+      contentProps={{ css: { "max-width" : "15vw" } }}
+
+    >
+      <Button 
+        variant="outline" 
+        size="sm" 
+        padding={"1rem"} 
+        borderRadius={"xl"}
+        bgColor={"#3ab684"}
+        color={"white"}
+      >
+        Note
+      </Button>
+    </Tooltip>
+  )
 }

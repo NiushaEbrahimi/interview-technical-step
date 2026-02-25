@@ -1,4 +1,4 @@
-export type User = {
+export type UserType = {
   id: number,
   username: string,
   email: string,
@@ -9,7 +9,8 @@ export type User = {
   refreshToken: string,
 }
 
-export type AuthResponse = {
-  user: User
-  token: string
+export interface AuthResponse {
+  success: boolean
+  error?: string
+  user?: UserType
 }
