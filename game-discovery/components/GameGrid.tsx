@@ -2,7 +2,6 @@ import GameCard from "./GameCard"
 import { Game } from "@/lib/types"
 
 export default function GameGrid({ games } : { games?: Game[] }) {
-  const list = games ?? []
   return (
     <div className="
       grid
@@ -12,7 +11,7 @@ export default function GameGrid({ games } : { games?: Game[] }) {
       lg:grid-cols-4
       gap-6
     ">
-      {list.map(game => (
+      {games.map(game => (
         <GameCard key={game.id} game={game} />
       ))}
     </div>
