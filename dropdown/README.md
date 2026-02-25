@@ -3,6 +3,10 @@
 ## Description
 This is a Next.js application featuring an advanced **Select Dropdown** component. It is built with **Headless UI (Listbox)** for unstyled, accessible logic and styled using **Tailwind CSS**.
 
+## Demo
+👁️ [View Live Project](https://interview-technical-step-dropdown.vercel.app/)
+
+
 ### Features
 - [x] **Headless UI Integration:** Fully accessible Listbox pattern
 - [x] **Tailwind Styling:** Responsive and customizable design
@@ -60,5 +64,3 @@ Follow these steps to get the project running on your local machine.
     npm run start
     ```
 
-## Demo
-👁️ [View Live Project](https://interview-technical-step-dropdown.vercel.app/)
