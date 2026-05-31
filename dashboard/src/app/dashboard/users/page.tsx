@@ -5,9 +5,9 @@ import { getUsers } from "@/_lib/services/getData";
 
 export default async function Users() {
 
-  const users = await getUsers();
+  const users = await getUsers({limit:0,recent:false});
 
   return (
-    <UsersPage users={users} />
+    <UsersPage users={users.users} />
   );
 }

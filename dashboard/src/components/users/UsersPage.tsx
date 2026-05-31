@@ -12,19 +12,9 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react";
+import { UserType } from "@/_lib/types";
 
-type User = {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    image: string;
-    role: string;
-    status: string;
-};
-
-
-export default function UsersPage({users}: {users: User[]}) {
+export default function UsersPage({users}: {users: UserType[]}) {
 
   return (
     <Box p="6">

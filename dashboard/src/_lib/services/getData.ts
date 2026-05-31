@@ -11,7 +11,7 @@ export async function getProducts() {
   return res.json();
 }
 
-export async function getUsers( {limit, recent} : {limit : number, recent : boolean} ) {
+export async function getUsers( {limit = 0, recent = false} : {limit? : number , recent? : boolean} ) {
   const url = 
     limit ? `https://dummyjson.com/users?limit=${limit}` 
     : recent ? `https://dummyjson.com/users?sortBy=id&order=desc&limit=${limit}` 
