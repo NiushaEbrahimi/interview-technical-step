@@ -2,7 +2,7 @@
 
 > Submission for Front-End Developer position (React/Next.js • TypeScript • Tailwind)
 
-[![Status](https://img.shields.io/badge/status-completed-success)](https://github.com/NiushaEbrahimi/interview-technical-step)
+[![Status](https://img.shields.io/badge/status-uncompleted-red)](https://github.com/NiushaEbrahimi/interview-technical-step)
 
 ---
 
